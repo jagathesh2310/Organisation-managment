@@ -1,0 +1,165 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .edit {
+
+      margin-left: 1rem !important;
+      width: 4.5rem !important;
+      height: 2.5rem !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header d-flex">
+    <a href="index.html"><button class="btn btn-info btn-lg">Back</button></a>
+    <div class="text-center w-100">
+      <h1>View Employee</h1>
+    </div>
+  </div>
+  <div id="main_div" style="visibility: hidden;">
+    <div class="container container-cus">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Employee id</th>
+            <th>Phone Number</th>
+            <th>Department</th>
+
+            <th>Reporting to</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody id="table_body">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div id="load_div"
+    style="width: 1440px;height: 100vh;display: flex;align-items: center;justify-content: center;position: absolute;top:0;">
+
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-success" role="status"></div>
+    <div class="spinner-grow text-info" role="status"></div>
+    <div class="spinner-grow text-warning" role="status"></div>
+  </div>
+  <script>
+
+    var main_data = "";
+    function get_employees() {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: "view_employee",
+          type: 'GET',
+
+          success: function (data) {
+            resolve(data)
+          },
+          error: function (error) {
+            reject(error)
+          },
+        })
+      })
+    }
+    function get_department(id) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: "view_department",
+          type: 'POST',
+          data: {
+            dept_id: id,
+          },
+
+          success: function (data) {
+            resolve(data)
+          },
+          error: function (error) {
+            reject(error)
+          },
+        })
+      })
+    }
+
+
+
+    get_employees().then((data) => {
+      console.log(data);
+    })
+    window.addEventListener("load", (event) => {
+      get_employees().then((data) => {
+        main_data = data;
+        var loop = false;
+
+        for (let i = 0; i < data.length; i++) {
+          console.log(data);
+          get_department(data[i].department_id).then((dept_data) => {
+            let x = "";
+            if (data[i].report == null) {
+              data[i].report = "-"
+            }
+            x += "<tr>";
+            x += "<td>" + data[i].employee_name + "</td>"
+            x += "<td>" + data[i].employee_id + "</td>"
+            x += "<td>" + data[i].phone_number + "</td>"
+            x += "<td>" + dept_data + "</td>"
+            x += "<td>" + data[i].report + "</td>"
+            x += "<td><button class='btn btn-primary edit' onclick=update('" + data[i].employee_id + "')>Edit</button><button class='btn btn-danger edit' onclick=delete_employee('" + data[i].employee_id + "')>Delete</button></td>"
+            x += "</tr>";
+            $("#table_body").append(x);
+            if (data.length /2 <= i) {
+              loop = true;
+            }
+            if (loop) {
+              $("#load_div").css("visibility", "hidden")
+              $("#main_div").css("visibility", "visible")
+            }
+          })
+
+        }
+
+
+
+
+
+      })
+    });
+
+    function update(id) {
+      for (let i = 0; i < main_data.length; i++) {
+        if (id == main_data[i].employee_id) {
+          if (main_data[i].report != "-") {
+            const temp_arr = main_data[i].report.split("-");
+            main_data[i].report_id = temp_arr[1];
+          }
+          else {
+            main_data[i].report_id = "-";
+          }
+
+          window.location.href = "update.html?employee_id=" + main_data[i].employee_id + "&employee_name=" + main_data[i].employee_name + "&phone_number=" + main_data[i].phone_number + "&department_id=" + main_data[i].department_id + "&report_id=" + main_data[i].report_id;
+          break;
+        }
+
+      }
+
+    }
+    function delete_employee(id) {
+      if (confirm("Confirm to Delete Employee " + id)) {
+        window.location.href = "delete_employee?employee_id=" + id;
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

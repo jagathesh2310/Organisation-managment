@@ -1,0 +1,227 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Organization Chart</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+		integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style>
+		.btn1 {
+			width: 150px !important;
+			word-break: break-word !important;
+			height: 100%;
+			border: 5px solid transparent;
+			transition: .2s ease;
+			border-radius: 50px;
+		}
+
+
+		.btn1:hover {
+			color: black;
+			background-color: transparent;
+			transform: scale(1.1);
+			border: 5px solid #0079FC;
+			
+		}
+		.btn1:hover .font_awesome{
+			visibility: visible !important;
+			position: relative !important;
+		}
+		.font_awesome{
+			margin-left: 0.5rem;
+		}
+
+		li {
+			list-style: none;
+			margin: 2rem;
+		}
+
+		.child1 {
+			background-color: antiquewhite;
+
+		}
+
+		.col-sm {
+			margin: 1rem;
+			display: flex;
+			flex-direction: column;
+			align-content: center;
+			justify-content: center;
+			box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+			border-radius: 10px;
+
+		}
+
+
+		.row {
+			margin: 2rem;
+		}
+
+		.manager1 {
+			box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+		}
+
+		.CEO {
+			background-color: rgb(89, 129, 111);
+			width: 10rem;
+			height: 4rem;
+		}
+
+		.manager1 {
+			background-color: rgb(42, 111, 121);
+			width: 10rem;
+			height: 4rem;
+
+
+		}
+
+		.manager2 {
+			background-color: rgb(101, 74, 107);
+			width: 10rem;
+			height: 4rem;
+		}
+
+		.developer {
+			background-color: rgb(180, 133, 99);
+			width: 10rem;
+			height: 4rem;
+		}
+
+		.selected>.font_awesome {
+			visibility: visible !important;
+			position: relative !important;
+		}
+		.selected {
+			background-color: #007BFF !important;
+		}
+	</style>
+</head>
+
+<body>
+	
+
+
+	<div class="header d-flex">
+		<a href="index.html"><button class="btn btn-info btn-lg">Back</button></a>
+		<div class="text-center w-100">
+			<h1>Organizational Chart</h1>
+		</div>
+	</div>
+	<div class="w-100" style="height: 87%;">
+		<div class="d-flex h-100 align-items-center justify-content-center">
+			<div class="row" id="main_div">
+				<div class="col-sm d-flex align-items-center ">
+					<button class="btn1 btn-primary CEO" id="ceo01" onclick="getdata('ceo01','ceo01')">CEO<i class="fa-solid fa-arrow-right font_awesome" style="visibility: hidden;position: absolute;"></i></button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script>
+		
+		var previous = "";
+		var previous_role = "";
+		var font_arrow="<i class='fa-solid fa-arrow-right font_awesome' style='visibility: hidden;position: absolute;'></i>"
+		function getdata(id, role) {
+			if (role != "developer") {
+				var html_id = "";
+
+				if (role == "ceo01") {
+					console.log($("#manager1").remove())
+					console.log($("#manager2").remove())
+					console.log($("#developer").remove())
+					html_id = "manager1"
+				}
+				else if (role == "manager1") {
+
+					console.log($("#manager2").remove())
+					console.log($("#developer").remove())
+					html_id = "manager2"
+				}
+
+				else if (role == "manager2") {
+					console.log($("#developer").remove())
+					html_id = "developer"
+				}
+				$("." + role).removeClass("selected")
+				if (previous != "" && role == previous_role) {
+
+					$("#" + previous).removeClass("selected");
+				}
+				$("#" + id).addClass("selected");
+				("#" + id).
+					previous = id;
+				previous_role = role;
+
+
+
+				get_employees(id).then((data) => {
+					var html = $("#main_div").html();
+
+					html += "<div class='col-sm' id='" + html_id + "'>";
+					if (html_id == "manager1") {
+						html += "<div class='row text-center'><h5>Manager Level 1</h5></div>"
+					}
+					else if (html_id == "manager2") {
+						html += "<div class='row text-center'><h5>Manager Level 2</h5></div>"
+					}
+					else if (html_id == "developer") {
+						html += "<div class='row text-center'><h5>Developer</h5></div>"
+					}
+					for (let i = 0; i < data.length; i++) {
+						html += "<div class='row'>";
+						html += "<button class='btn1 btn-primary " + html_id + "' id='" + data[i].employee_id + "' onclick=\"getdata('" + data[i].employee_id + "','" + html_id + "')\">" + data[i].employee_name + "-" + data[i].employee_id +font_arrow+ "</button>"
+						html += "</div>"
+					}
+
+					if (data.length == 0) {
+						html += "<h6>No data Available</h6>"
+					}
+					html += "</div>";
+					console.log(html);
+
+					$("#main_div").html(html);
+
+				})
+
+			}
+		}
+
+
+
+
+		function get_employees(report_id_m) {
+			console.log(report_id_m);
+			return new Promise((resolve, reject) => {
+				$.ajax({
+					url: "view_employees",
+					type: 'GET',
+					data: {
+						option: "employees",
+						report_id: report_id_m,
+					},
+					success: function (data) {
+						resolve(data)
+					},
+					error: function (error) {
+						reject(error)
+					},
+				})
+			})
+		}
+	</script>
+
+
+
+</body>
+
+</html>

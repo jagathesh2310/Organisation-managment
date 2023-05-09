@@ -1,0 +1,101 @@
+/* --------------Global------------------ */
+body {
+    background-color: #f2f2f2;
+  }
+
+  .header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .header h1 {
+    font-size: 36px;
+    margin: 0;
+  }
+
+  .btn-cus {
+    margin: 0 1rem;
+    padding: 1rem 2rem;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #333;
+    color: white;
+    border: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+.btn-cus:hover {
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 0 10px #333;
+  }
+
+
+/* ----------index page--------------- */
+
+
+
+
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+  /* --------------------Add Form----------------------- */
+      .form-group {
+        margin-top: 2rem;
+      }
+
+      .form-group label {
+        font-weight: bold;
+      }
+
+   
+
+      .form-check {
+        margin-top: 1rem;
+      }
+
+      .form-check label {
+        font-weight: normal;
+        margin-left: 1rem;
+      }
+
+
+
+      /* View Employees */
+
+      .container-cus{
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+        border: 2px solid #333;
+      }
+
+/* chart */
+.employee {
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #6C757D;
+    margin: 1rem ;
+    border-radius: 1rem;
+}
+
+.employee_li{
+	margin: 0.5rem !important;
+}
+.spinner-grow{
+	margin: 1rem;
+}
+
+.edit{
+  
+    margin-left: 1rem !important;
+    width: 4.5rem !important;
+    height: 2.5rem !important;
+}
+
+
