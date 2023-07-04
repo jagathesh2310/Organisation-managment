@@ -1,0 +1,6 @@
+﻿  pch.cpp
+C:\Users\ASUS\source\repos\update_emp\update_emp\pch.cpp(20,53): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\ASUS\source\repos\update_emp\update_emp\pch.cpp(21,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  dllmain.cpp
+     Creating library C:\Users\ASUS\source\repos\update_emp\x64\Debug\update_emp.lib and object C:\Users\ASUS\source\repos\update_emp\x64\Debug\update_emp.exp
+  update_emp.vcxproj -> C:\Users\ASUS\source\repos\update_emp\x64\Debug\update_emp.dll

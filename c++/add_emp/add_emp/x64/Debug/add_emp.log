@@ -1,0 +1,5 @@
+﻿  pch.cpp
+C:\Users\ASUS\source\repos\add_emp\add_emp\pch.cpp(21,53): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\ASUS\source\repos\add_emp\add_emp\pch.cpp(22,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  dllmain.cpp
+  add_emp.vcxproj -> C:\Users\ASUS\source\repos\add_emp\x64\Debug\add_emp.dll

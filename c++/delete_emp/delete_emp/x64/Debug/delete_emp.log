@@ -1,0 +1,6 @@
+﻿  pch.cpp
+C:\Users\ASUS\source\repos\delete_emp\delete_emp\pch.cpp(19,53): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\ASUS\source\repos\delete_emp\delete_emp\pch.cpp(20,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  dllmain.cpp
+     Creating library C:\Users\ASUS\source\repos\delete_emp\x64\Debug\delete_emp.lib and object C:\Users\ASUS\source\repos\delete_emp\x64\Debug\delete_emp.exp
+  delete_emp.vcxproj -> C:\Users\ASUS\source\repos\delete_emp\x64\Debug\delete_emp.dll
