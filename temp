@@ -1,0 +1,11 @@
+Active Directory: LDAP is integral to Active Directory (AD), Microsoft's implementation of a directory service. Windows Server 2016 includes Active Directory Domain Services (AD DS), which uses LDAP as one of its primary protocols for accessing and managing directory data. AD DS provides centralized authentication, authorization, and configuration information for users, groups, computers, and other network resources in a Windows domain environment.
+
+User Authentication: LDAP enables user authentication against the Active Directory domain. Applications and services running on Windows Server 2016 can utilize LDAP to authenticate users' credentials, granting them access to resources based on their permissions and group memberships stored in Active Directory.
+
+Group Policy: LDAP is used to access and apply Group Policy settings in Windows Server 2016. Group Policy Objects (GPOs) stored in Active Directory contain configuration settings that control various aspects of users' and computers' behavior in an organization's network. LDAP queries are employed to retrieve and apply these policy settings to domain-joined clients.
+
+Directory Integration: Windows Server 2016 can integrate with other directory services or LDAP-based systems. This integration allows for the synchronization of user accounts, groups, and other directory objects between different directory services, such as Active Directory and third-party LDAP directories or applications.
+
+Management and Administration: LDAP provides a standardized mechanism for managing and administering directory services. Administrators can use LDAP-based tools and utilities to perform tasks such as querying directory data, adding or modifying user accounts, managing group memberships, and configuring directory schema.
+
+Application Integration: LDAP is commonly used by applications running on Windows Server 2016 to access directory information for various purposes. This includes querying user attributes, searching for groups, retrieving organizational data, and performing authentication and authorization checks.
